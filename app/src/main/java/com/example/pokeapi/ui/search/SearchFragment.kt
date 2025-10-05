@@ -73,6 +73,8 @@ class SearchFragment : Fragment() {
             putString("teamName", team.displayName ?: team.shortDisplayName ?: team.abbreviation)
             putString("teamLogoUrl", team.logos?.firstOrNull()?.href)
             putString("teamAbbr", team.abbreviation)
+            team.id?.let { putString("teamId", it) }
+            viewModel.leagueFor(team)?.let { putString("teamLeague", it) }
         }
         findNavController().navigate(R.id.teamFragment, args)
     }
