@@ -3,8 +3,6 @@ package com.example.pokeapi.ui.team
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.pokeapi.network.AthleteGroup
-import com.example.pokeapi.network.AthleteItem
 import com.example.pokeapi.network.TeamDetailResponse
 import com.example.pokeapi.network.espnApi
 import retrofit2.Call
@@ -55,30 +53,55 @@ class TeamViewModel : ViewModel() {
 
                 val players = response.body()
                     ?.team
-                    ?.let { team ->
-                        val legacyGroups = team.athleteGroups.orEmpty().toRosterPlayers()
-
-                        val modernGroups = team.athletes?.let { athletes ->
-                            val groupedPlayers = athletes.groups.orEmpty().toRosterPlayers()
-                            val ungroupedPlayers = athletes.items.orEmpty().mapNotNull { item ->
-                                item.toRosterPlayer(null)
-                            }
-
-                            when {
-                                groupedPlayers.isNotEmpty() -> groupedPlayers
-                                ungroupedPlayers.isNotEmpty() -> ungroupedPlayers
-                                else -> emptyList()
-                            }
-                        }.orEmpty()
+                    ?.athletes
+                    ?.let { athletes ->
+                        val groups = when {
+                            !athletes.groups.isNullOrEmpty() -> athletes.groups
+                            !athletes.legacyGroups.isNullOrEmpty() -> athletes.legacyGroups
+                            else -> null
+                        }
 
                         when {
-                            legacyGroups.isNotEmpty() -> legacyGroups
-                            modernGroups.isNotEmpty() -> modernGroups
+                            !groups.isNullOrEmpty() -> {
+                                groups.flatMap { group ->
+                                    val groupName = group.displayName
+                                    group.items.orEmpty().map { item ->
+                                        val position = item.position?.abbreviation
+                                            ?: item.position?.displayName
+                                        RosterPlayer(
+                                            name = item.fullName
+                                                ?: item.displayName
+                                                ?: item.shortName
+                                                ?: "",
+                                            jersey = item.jersey,
+                                            position = position,
+                                            group = groupName
+                                        )
+                                    }
+                                }
+                            }
+
+                            !athletes.items.isNullOrEmpty() -> {
+                                athletes.items.map { item ->
+                                    val position = item.position?.abbreviation
+                                        ?: item.position?.displayName
+                                    RosterPlayer(
+                                        name = item.fullName
+                                            ?: item.displayName
+                                            ?: item.shortName
+                                            ?: "",
+                                        jersey = item.jersey,
+                                        position = position,
+                                        group = item.position?.displayName
+                                    )
+                                }
+                            }
+
                             else -> emptyList()
                         }
                     }
-                    ?.sortedBy { it.name.lowercase() }
                     .orEmpty()
+                    .sortedBy { it.name.lowercase() }
 
                 if (players.isEmpty()) {
                     _state.value = TeamUiState.Error("Sin jugadores disponibles")
@@ -98,29 +121,5 @@ class TeamViewModel : ViewModel() {
         currentCall?.cancel()
         currentCall = null
         super.onCleared()
-    }
-}
-
-private fun AthleteItem.toRosterPlayer(groupName: String?): RosterPlayer? {
-    val playerName = fullName ?: displayName ?: shortName ?: ""
-    if (playerName.isBlank()) return null
-
-    val jerseyNumber = jersey?.takeIf { it.isNotBlank() }
-    val positionName = position?.abbreviation?.takeIf { it.isNotBlank() }
-        ?: position?.displayName?.takeIf { it.isNotBlank() }
-    val normalizedGroup = groupName?.takeIf { it.isNotBlank() }
-
-    return RosterPlayer(
-        name = playerName,
-        jersey = jerseyNumber,
-        position = positionName,
-        group = normalizedGroup
-    )
-}
-
-private fun List<AthleteGroup>.toRosterPlayers(): List<RosterPlayer> = flatMap { group ->
-    val groupName = group.displayName
-    group.items.orEmpty().mapNotNull { item ->
-        item.toRosterPlayer(groupName)
     }
 }
