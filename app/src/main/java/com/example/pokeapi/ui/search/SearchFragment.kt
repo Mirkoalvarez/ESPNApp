@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokeapi.R
 import com.example.pokeapi.databinding.FragmentSearchBinding
 import com.example.pokeapi.model.espn.Team
+import com.google.gson.Gson
+
 
 class SearchFragment : Fragment() {
 
@@ -70,6 +72,7 @@ class SearchFragment : Fragment() {
 
     private fun openTeam(team: Team) {
         val args = Bundle().apply {
+            putString("teamJson", Gson().toJson(team))
             putString("teamName", team.displayName ?: team.shortDisplayName ?: team.abbreviation)
             putString("teamLogoUrl", team.logos?.firstOrNull()?.href)
             putString("teamAbbr", team.abbreviation)

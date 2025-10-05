@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="?attr/colorSurface">
 
     <!-- Barra superior decorativa (fondo blanco, texto negro) -->
     <com.google.android.material.appbar.MaterialToolbar
@@ -13,11 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_marginTop="32dp"
-        android:background="@android:color/white"
+        android:background="?attr/colorSurface"
         android:elevation="4dp"
+        app:menu="@menu/menu_main"
         app:title="ESPN"
         app:titleCentered="true"
-        app:titleTextColor="@android:color/black" />
+        app:titleTextColor="?attr/colorOnSurface" />
 
     <!-- Contenedor de Fragments (respeta el espacio de la barra decorativa) -->
     <androidx.fragment.app.FragmentContainerView
@@ -36,9 +37,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@android:color/white"
-        app:itemIconTint="@android:color/black"
-        app:itemTextColor="@android:color/black"
+        android:background="?attr/colorSurface"
+        app:itemIconTint="@color/bottom_nav_item_color"
+        app:itemTextColor="@color/bottom_nav_item_color"
         app:menu="@menu/bottom_nav_menu"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
