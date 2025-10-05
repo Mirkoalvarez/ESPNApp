@@ -17,4 +17,8 @@
         android:icon="@drawable/ic_search"
         android:title="Buscar" />
 
+    <item
+        android:id="@+id/action_toggle_theme"
+        android:icon="@drawable/ic_dark_mode"
+        android:title="@string/dark_mode" />
 </menu>

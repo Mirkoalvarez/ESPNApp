@@ -5,15 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.example.pokeapi.databinding.ActivityMainBinding
-import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityMainBinding
     private var isDarkModeEnabled: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Aplicar tema guardado ANTES de inflar vistas
         isDarkModeEnabled = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
             .getBoolean(KEY_DARK_MODE, false)
         AppCompatDelegate.setDefaultNightMode(
@@ -25,42 +27,42 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Título fijo en la barra decorativa (no es ActionBar)
+        // Si querés usarla como ActionBar
+        setSupportActionBar(binding.decorToolbar)
         binding.decorToolbar.title = "ESPN"
 
-        setupThemeToggle()
-
-        // OBTENER navController de forma segura con NavHostFragment (evita crashes)
+        // NavController
         val navHost =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHost.navController
 
-        // Conectar el bottom nav
+        // Vincula tabs con Navigation Component
         binding.bottomNavigation.setupWithNavController(navController)
-    }
 
-    private fun setupThemeToggle() {
-        val toggleButton = binding.themeToggleButton
-
-        updateThemeButtonState(toggleButton)
-        toggleButton.setOnClickListener {
-            isDarkModeEnabled = !isDarkModeEnabled
-            persistThemePreference(isDarkModeEnabled)
-            updateThemeButtonState(toggleButton)
-            AppCompatDelegate.setDefaultNightMode(
-                if (isDarkModeEnabled) AppCompatDelegate.MODE_NIGHT_YES
-                else AppCompatDelegate.MODE_NIGHT_NO
-            )
+        // Intercepta el ítem "action_toggle_theme" para NO navegar y alternar el tema
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.action_toggle_theme -> {
+                    // Alternar y persistir
+                    isDarkModeEnabled = !isDarkModeEnabled
+                    persistThemePreference(isDarkModeEnabled)
+                    AppCompatDelegate.setDefaultNightMode(
+                        if (isDarkModeEnabled) AppCompatDelegate.MODE_NIGHT_YES
+                        else AppCompatDelegate.MODE_NIGHT_NO
+                    )
+                    // Devolver false evita que el BottomNavigation lo marque como seleccionado
+                    false
+                }
+                else -> {
+                    // Para los demás items, dejar que Navigation navegue
+                    NavigationUI.onNavDestinationSelected(item, navController)
+                }
+            }
         }
-    }
 
-    private fun updateThemeButtonState(button: MaterialButton) {
-        val textRes = if (isDarkModeEnabled) R.string.light_mode else R.string.dark_mode
-        val iconRes = if (isDarkModeEnabled) R.drawable.ic_light_mode else R.drawable.ic_dark_mode
-        button.setText(textRes)
-        button.setIconResource(iconRes)
+        // Opcional: no hacer nada en reselección (evita recargar el fragment actual)
+        binding.bottomNavigation.setOnItemReselectedListener { /* no-op */ }
     }
-
 
     private fun persistThemePreference(isDarkMode: Boolean) {
         getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit {
