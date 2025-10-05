@@ -40,20 +40,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupThemeToggle() {
-        val menuItem = binding.decorToolbar.menu.findItem(R.id.action_theme_toggle)
-        val toggleButton = menuItem?.actionView?.findViewById<MaterialButton>(R.id.themeToggleButton)
+        val toggleButton = binding.themeToggleButton
 
-        toggleButton?.let { button ->
-            updateThemeButtonState(button)
-            button.setOnClickListener {
-                isDarkModeEnabled = !isDarkModeEnabled
-                persistThemePreference(isDarkModeEnabled)
-                updateThemeButtonState(button)
-                AppCompatDelegate.setDefaultNightMode(
-                    if (isDarkModeEnabled) AppCompatDelegate.MODE_NIGHT_YES
-                    else AppCompatDelegate.MODE_NIGHT_NO
-                )
-            }
+        updateThemeButtonState(toggleButton)
+        toggleButton.setOnClickListener {
+            isDarkModeEnabled = !isDarkModeEnabled
+            persistThemePreference(isDarkModeEnabled)
+            updateThemeButtonState(toggleButton)
+            AppCompatDelegate.setDefaultNightMode(
+                if (isDarkModeEnabled) AppCompatDelegate.MODE_NIGHT_YES
+                else AppCompatDelegate.MODE_NIGHT_NO
+            )
         }
     }
 
