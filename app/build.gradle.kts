@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.pokeapi"
+    namespace = "com.example.espnapp"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.pokeapi"
+        applicationId = "com.example.espnapp"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
