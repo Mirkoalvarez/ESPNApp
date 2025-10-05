@@ -44,7 +44,6 @@ data class Competitor(
 )
 
 data class Team(
-    @SerializedName("id") val id: String?,
     @SerializedName("displayName") val displayName: String?,
     @SerializedName("shortDisplayName") val shortDisplayName: String?,
     @SerializedName("abbreviation") val abbreviation: String?,

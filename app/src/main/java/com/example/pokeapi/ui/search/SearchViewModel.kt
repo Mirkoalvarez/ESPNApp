@@ -24,8 +24,6 @@ class SearchViewModel : ViewModel() {
     val state: LiveData<SearchUiState> = _state
 
     private val currentCalls = mutableListOf<Call<TeamsResponse>>()
-    private val teamLeagues = mutableMapOf<String, String>()
-
 
     // Ligas donde buscar
     private val leagues = listOf("eng.1", "esp.1", "ita.1", "ger.1", "fra.1", "arg.1")
@@ -40,7 +38,6 @@ class SearchViewModel : ViewModel() {
         // Cancelar en curso
         currentCalls.forEach { it.cancel() }
         currentCalls.clear()
-        teamLeagues.clear()
 
         _state.value = SearchUiState.Loading
 
@@ -77,10 +74,7 @@ class SearchViewModel : ViewModel() {
                                     (t.abbreviation ?: "")
                             name.lowercase().contains(q.lowercase())
                         }
-                        .forEach { team ->
-                            team.id?.let { id -> teamLeagues[id] = lg }
-                            buffer += team
-                        }
+                        .forEach { buffer += it }
 
                     finishIfDone()
                 }
@@ -92,7 +86,6 @@ class SearchViewModel : ViewModel() {
         }
     }
 
-    fun leagueFor(team: Team): String? = team.id?.let { teamLeagues[it] }
     override fun onCleared() {
         currentCalls.forEach { it.cancel() }
         currentCalls.clear()
