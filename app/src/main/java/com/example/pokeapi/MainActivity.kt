@@ -56,8 +56,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateThemeButtonState(button: MaterialButton) {
         val textRes = if (isDarkModeEnabled) R.string.light_mode else R.string.dark_mode
+        val iconRes = if (isDarkModeEnabled) R.drawable.ic_light_mode else R.drawable.ic_dark_mode
         button.setText(textRes)
+        button.setIconResource(iconRes)
     }
+
 
     private fun persistThemePreference(isDarkMode: Boolean) {
         getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit {
