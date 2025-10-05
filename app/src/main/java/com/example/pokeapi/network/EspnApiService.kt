@@ -51,8 +51,15 @@ data class TeamDetailResponse(@SerializedName("team") val team: TeamDetail?)
 data class TeamDetail(
     @SerializedName("id") val id: String?,
     @SerializedName("displayName") val displayName: String?,
-    @SerializedName("athletes") val athleteGroups: List<AthleteGroup>?
+    @SerializedName("athleteGroups") val athleteGroups: List<AthleteGroup>?,
+    @SerializedName("athletes") val athletes: TeamAthletes?
 )
+
+data class TeamAthletes(
+    @SerializedName("groups") val groups: List<AthleteGroup>?,
+    @SerializedName("items") val items: List<AthleteItem>?,
+)
+
 
 data class AthleteGroup(
     @SerializedName("displayName") val displayName: String?,
