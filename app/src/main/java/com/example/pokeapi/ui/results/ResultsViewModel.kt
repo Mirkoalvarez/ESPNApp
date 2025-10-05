@@ -31,7 +31,7 @@ class ResultsViewModel(
         repo.getManyLeaguesScoreboards(leagues, utcToday) { result ->
             result.onSuccess { map ->
                 val items = mutableListOf<ScoreItem>()
-                // code -> body, necesitamos el título:
+                // code -> body, we need the title:
                 map.forEach { (code, body) ->
                     val title = leagues[code] ?: code
                     val mapped = body?.let { mapToItems(code, title, it) }.orEmpty()
@@ -48,7 +48,7 @@ class ResultsViewModel(
         }
     }
 
-    // ---- helpers de mapeo (antes estaban en el Fragment) ----
+    // ---- mapping helpers (they used to be in the Fragment) ----
     private fun mapToItems(code: String, title: String, body: ScoreboardResponse): List<ScoreItem> {
         val events = buildList {
             addAll(body.events.orEmpty())

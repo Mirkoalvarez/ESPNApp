@@ -25,7 +25,7 @@ class SearchViewModel : ViewModel() {
 
     private val currentCalls = mutableListOf<Call<TeamsResponse>>()
 
-    // Ligas donde buscar
+    // Leagues to search in
     private val leagues = listOf("eng.1", "esp.1", "ita.1", "ger.1", "fra.1", "arg.1")
 
     fun search(query: String) {
@@ -35,7 +35,7 @@ class SearchViewModel : ViewModel() {
             return
         }
 
-        // Cancelar en curso
+        // Cancel any in-flight requests
         currentCalls.forEach { it.cancel() }
         currentCalls.clear()
 
@@ -80,7 +80,7 @@ class SearchViewModel : ViewModel() {
                 }
 
                 override fun onFailure(call: Call<TeamsResponse>, t: Throwable) {
-                    finishIfDone() // seguimos con las demás ligas
+                    finishIfDone() // continue with the remaining leagues
                 }
             })
         }

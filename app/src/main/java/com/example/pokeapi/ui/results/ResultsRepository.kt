@@ -31,7 +31,7 @@ class ResultsRepository(
             })
     }
 
-    /** Llama varias ligas en paralelo y junta los resultados */
+    ///** Calls several leagues in parallel and merges the results */
     fun getManyLeaguesScoreboards(
         leagues: Map<String, String>, // code -> title
         yyyymmddUtc: String,

@@ -36,7 +36,7 @@ class LeagueResultsViewModel(
 
         repo.getLeagueScoreboard(leagueCode, yyyymmdd) { result ->
             result.onSuccess { body ->
-                val items = mapToItems(leagueCode, "", body) // el título lo pone el Fragment
+                val items = mapToItems(leagueCode, "", body) // the Fragment supplies the title
                 if (items.isEmpty()) {
                     _state.postValue(
                         ResultsUiState.Empty("No hay partidos para ${dateUtc.format(ddMMyyyyFmt)}")
@@ -63,7 +63,7 @@ class LeagueResultsViewModel(
         }
         val out = mutableListOf<ScoreItem>()
         if (pairs.isNotEmpty()) {
-            // el Section se completa con el título en el Fragment si querés
+            // the Fragment can complete the Section with the title if you prefer
             out += ScoreItem.Section(code, title)
             pairs.forEach { (c, meta) -> out += ScoreItem.Match(c, meta) }
         }

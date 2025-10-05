@@ -36,7 +36,7 @@ class SearchFragment : Fragment() {
             viewModel.search(binding.etSearch.text.toString())
         }
 
-        // Observa el estado del ViewModel
+        /// Observe the ViewModel state
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is SearchUiState.Idle -> {

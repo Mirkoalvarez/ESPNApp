@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-// Modelo para The Sports DB
+// Model for The Sports DB
 data class SportsDbResponse(
     val events: List<SportsDbEvent>?
 )

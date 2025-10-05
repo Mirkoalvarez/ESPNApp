@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     private var isDarkModeEnabled: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Aplicar tema guardado ANTES de inflar vistas
+        // Apply saved theme BEFORE inflating views
         isDarkModeEnabled = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
             .getBoolean(KEY_DARK_MODE, false)
         AppCompatDelegate.setDefaultNightMode(
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Si querés usarla como ActionBar
+        // ActionBar
         setSupportActionBar(binding.decorToolbar)
         binding.decorToolbar.title = "ESPN"
 
@@ -36,10 +36,10 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHost.navController
 
-        // Vincula tabs con Navigation Component
+        // Link tabs with the Navigation Component
         binding.bottomNavigation.setupWithNavController(navController)
 
-        // Intercepta el ítem "action_toggle_theme" para NO navegar y alternar el tema
+        // Intercept the "action_toggle_theme" item to avoid navigation and toggle the theme
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_toggle_theme -> {
@@ -50,17 +50,17 @@ class MainActivity : AppCompatActivity() {
                         if (isDarkModeEnabled) AppCompatDelegate.MODE_NIGHT_YES
                         else AppCompatDelegate.MODE_NIGHT_NO
                     )
-                    // Devolver false evita que el BottomNavigation lo marque como seleccionado
+                    // Returning false prevents BottomNavigation from marking it as selected
                     false
                 }
                 else -> {
-                    // Para los demás items, dejar que Navigation navegue
+                    // For the other items, let Navigation handle navigation
                     NavigationUI.onNavDestinationSelected(item, navController)
                 }
             }
         }
 
-        // Opcional: no hacer nada en reselección (evita recargar el fragment actual)
+        // Optional: do nothing on reselection (prevents reloading the current fragment)
         binding.bottomNavigation.setOnItemReselectedListener { /* no-op */ }
     }
 

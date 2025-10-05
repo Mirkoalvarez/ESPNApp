@@ -9,7 +9,7 @@ import com.example.pokeapi.databinding.ItemScoreSectionBinding
 import com.example.pokeapi.model.espn.Competition
 import com.example.pokeapi.model.espn.Competitor
 
-// ---- MODELOS ----
+// ---- MODELS ----
 sealed class ScoreItem {
     data class Section(val leagueCode: String, val leagueTitle: String) : ScoreItem()
     data class Match(val comp: Competition, val meta: String) : ScoreItem()

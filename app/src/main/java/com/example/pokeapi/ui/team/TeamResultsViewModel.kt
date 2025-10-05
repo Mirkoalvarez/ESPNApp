@@ -86,7 +86,7 @@ class TeamResultsViewModel(
                 val short = t?.shortDisplayName.orEmpty()
                 val name = t?.displayName.orEmpty()
 
-                // Comparaciones “amigables”
+                // "Friendly" comparisons
                 fun norm(s: String) = Normalizer.normalize(s, Normalizer.Form.NFD)
                     .replace(Regex("\\p{Mn}+"), "")
                     .lowercase()

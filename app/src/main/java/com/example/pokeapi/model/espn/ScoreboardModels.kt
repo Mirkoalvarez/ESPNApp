@@ -40,7 +40,7 @@ data class Competitor(
     @SerializedName("homeAway") val homeAway: String?, // "home" / "away"
     @SerializedName("score") val score: String?,
     @SerializedName("team") val team: Team?,
-    @SerializedName("form") val form: String? // a veces viene la racha (EGGPP)
+    @SerializedName("form") val form: String? // // sometimes the streak appears (EGGPP)
 )
 
 data class Team(

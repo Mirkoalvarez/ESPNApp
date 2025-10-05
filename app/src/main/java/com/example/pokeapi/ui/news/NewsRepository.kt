@@ -11,7 +11,7 @@ import retrofit2.Response
 class NewsRepository(
     private val api: EspnApiService = espnApi
 ) {
-    /** Junta noticias de varias ligas en paralelo. */
+    // Collects news from several leagues in parallel.
     fun getLeaguesNews(
         leagues: List<String>,
         onResult: (Result<List<Article>>) -> Unit
@@ -44,7 +44,7 @@ class NewsRepository(
         }
     }
 
-    /** Prueba endpoints candidatos secuencialmente hasta obtener noticias. */
+    // Tests candidate endpoints sequentially until it gets news.
     fun getNewsFromCandidates(
         candidates: List<String>,
         onResult: (Result<List<Article>>) -> Unit

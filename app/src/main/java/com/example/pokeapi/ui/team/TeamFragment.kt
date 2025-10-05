@@ -32,7 +32,7 @@ class TeamFragment : Fragment() {
     private lateinit var dateAdapter: DateStripAdapter
     private lateinit var resultsAdapter: ResultsAdapter
 
-    // mismas ligas que usaste en Search/Results
+    // same leagues used in Search/Results
     private val leagues = mapOf(
         "arg.1" to "Liga Profesional Argentina",
         "eng.1" to "Premier League",
@@ -56,7 +56,7 @@ class TeamFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        // ---- datos del header
+        // ---- header data
         val nameFromArgs = requireArguments().getString("teamName").orEmpty()
         val logo = requireArguments().getString("teamLogoUrl")
         val teamJson = requireArguments().getString("teamJson")
@@ -68,7 +68,7 @@ class TeamFragment : Fragment() {
         teamAbbr = requireArguments().getString("teamAbbr") ?: team?.abbreviation
         teamName = team?.shortDisplayName ?: team?.displayName ?: nameFromArgs
 
-        // ---- tira de fechas
+        // ---- date strip
         dateAdapter = DateStripAdapter { picked ->
             dateAdapter.setSelected(picked)
             selectedUtcDate = picked
@@ -88,12 +88,12 @@ class TeamFragment : Fragment() {
         val range = generateSequence(start) { it.plusDays(1) }.takeWhile { !it.isAfter(end) }.toList()
         dateAdapter.submit(range, initiallySelected = selectedUtcDate)
 
-        // ---- lista de partidos
-        resultsAdapter = ResultsAdapter(onSeeAll = { _, _ -> /* no-op en vista de equipo */ })
+        // ---- match list
+        resultsAdapter = ResultsAdapter(onSeeAll = { _, _ -> /* no-op on the team view */ })
         b.rvTeamResults.layoutManager = LinearLayoutManager(requireContext())
         b.rvTeamResults.adapter = resultsAdapter
 
-        // ---- observar estado
+        // ---- observe state
         vm.state.observe(viewLifecycleOwner) { st ->
             when (st) {
                 is ResultsUiState.Loading -> {
@@ -103,7 +103,7 @@ class TeamFragment : Fragment() {
                 is ResultsUiState.Success -> {
                     b.progressTeam.isVisible = false
                     b.tvEmptyTeam.isVisible = false
-                    // si el primer item no es section, lo agrego yo por prolijidad
+                    // if the first item is not a section, add one for neatness
                     val withSection = if (st.items.isNotEmpty() && st.items.first() !is ScoreItem.Section) {
                         listOf(ScoreItem.Section("", "Partidos")) + st.items
                     } else st.items
@@ -125,7 +125,7 @@ class TeamFragment : Fragment() {
             }
         }
 
-        // ---- carga inicial
+        // ---- initial load
         vm.loadForTeam(leagues, selectedUtcDate, teamAbbr, teamName)
         b.rvDateStripTeam.post { scrollDateTo(selectedUtcDate) }
     }

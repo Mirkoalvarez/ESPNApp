@@ -43,13 +43,13 @@ class MenuFragment : Fragment() {
             adapter = this@MenuFragment.adapter
         }
 
-        // Observamos la lista desde el ViewModel
+        // Observe the list from the ViewModel
         viewModel.sports.observe(viewLifecycleOwner) { list ->
             adapter.submitList(list)
         }
 
-        // Si en el futuro agregás un buscador:
-        // binding.searchEdit.doAfterTextChanged { viewModel.filter(it?.toString()) }
+        // If you add a search box in the future:
+        // binding.searchEdit.doAfterTextChanged { viewModel.filter(it?.toString())
     }
 
     override fun onDestroyView() {

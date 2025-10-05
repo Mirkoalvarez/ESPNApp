@@ -8,7 +8,7 @@ data class SportItem(val title: String, val key: String)
 
 class MenuViewModel : ViewModel() {
 
-    // Lista estática (si mañana querés cargarla desde red/BD, solo la cambiás acá)
+    // Static list (if you want to load it from network/DB later, just change it here)
     private val baseSports = listOf(
         SportItem("Fútbol (general)", "soccer"),
         SportItem("Tenis", "tennis"),
@@ -23,7 +23,7 @@ class MenuViewModel : ViewModel() {
     private val _sports = MutableLiveData<List<SportItem>>(baseSports)
     val sports: LiveData<List<SportItem>> = _sports
 
-    /** Opcional: pequeño filtro local si lo necesitás más adelante */
+    // Optional: small local filter if you need it later
     fun filter(query: String?) {
         val q = query?.trim()?.lowercase().orEmpty()
         if (q.isEmpty()) {

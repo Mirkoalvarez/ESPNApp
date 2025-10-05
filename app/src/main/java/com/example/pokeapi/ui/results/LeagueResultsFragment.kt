@@ -42,7 +42,7 @@ class LeagueResultsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.tvTitle.text = "$leagueTitle • Resultados"
 
-        // Tira horizontal
+        /// Horizontal strip
         dateAdapter = DateStripAdapter { picked ->
             dateAdapter.setSelected(picked)
             selectedUtcDate = picked
@@ -64,14 +64,14 @@ class LeagueResultsFragment : Fragment() {
         val range = generateSequence(start) { it.plusDays(1) }.takeWhile { !it.isAfter(end) }.toList()
         dateAdapter.submit(range, initiallySelected = selectedUtcDate)
 
-        // Lista de partidos
+        // Match list
         resultsAdapter = ResultsAdapter(onSeeAll = { _, _ -> })
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = resultsAdapter
 
         observeState()
 
-        // Carga inicial
+        // Initial load
         viewModel.setDateUtc(selectedUtcDate)
         viewModel.load(leagueCode, selectedUtcDate)
         binding.rvDateStrip.post { scrollDateTo(selectedUtcDate) }
@@ -94,7 +94,7 @@ class LeagueResultsFragment : Fragment() {
                 is ResultsUiState.Success -> {
                     binding.progressBar.visibility = View.GONE
                     binding.tvEmpty.visibility = View.GONE
-                    // Insertamos sección con el título (el VM no lo conoce)
+                    // Insert a section with the title (the ViewModel does not know it)
                     val withSection = if (st.items.isNotEmpty() && st.items.first() !is ScoreItem.Section) {
                         listOf(ScoreItem.Section(leagueCode, leagueTitle)) + st.items
                     } else st.items

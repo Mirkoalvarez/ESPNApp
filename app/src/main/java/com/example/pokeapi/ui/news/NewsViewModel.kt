@@ -16,7 +16,7 @@ class NewsViewModel(
     private val _state = MutableLiveData<NewsUiState>(NewsUiState.Idle)
     val state: LiveData<NewsUiState> = _state
 
-    /** Noticias de HOY de las ligas top */
+    //Today's news from the top leagues.
     fun loadTodaySoccerNews(leagues: List<String>, tz: ZoneId) {
         _state.postValue(NewsUiState.Loading)
 
