@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Título -->
+    <!-- Title -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="0dp"
@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Tira de fechas -->
+    <!-- line of dates -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDateStrip"
         android:layout_width="0dp"
@@ -38,14 +38,14 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_progress_overlay"
         android:elevation="8dp"
-        android:indeterminateTint="@android:color/white"
+        android:indeterminateTint="?attr/colorPrimary"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rvDateStrip"/>
 
-    <!-- Lista de partidos -->
+    <!-- List of matchs -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
@@ -56,7 +56,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Vacío -->
+    <!-- Empty -->
     <TextView
         android:id="@+id/tvEmpty"
         android:layout_width="wrap_content"

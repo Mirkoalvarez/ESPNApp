@@ -16,9 +16,9 @@ La portada agrupa noticias recientes de las principales ligas de fútbol, filtra
 La aplicación consume la API pública de ESPN disponible [Public ESPN API](https://github.com/pseudo-r/Public-ESPN-API), encapsulada mediante Retrofit y OkHttp con un interceptor de logging básico para facilitar la depuración de llamadas HTTP.【F:app/src/main/java/com.example.espnapp/network/EspnRetrofit.kt†L8-L26】
 
 
-🎥 **Demo del proyecto**
+🎥 **Video Demo del proyecto**
 
-[![Ver demo en Google Drive](https://img.shields.io/badge/▶️%20Ver%20demo%20en%20Drive-blue?style=for-the-badge)](https://drive.google.com/file/d/12_y9BrjtjYTzqzlKC7XPQmcwcKqvHtIU/view?usp=sharing)
+[![Ver Video demo en Google Drive](https://img.shields.io/badge/▶️%20Ver%20demo%20en%20Drive-blue?style=for-the-badge)](https://drive.google.com/file/d/1zfx7yV-L3W88r_n3Wkn7Y9F4XFk8XmKA/view?usp=sharing)
 
 ## Endpoints y estructura de datos
 A continuación se listan los recursos REST consultados y los modelos relevantes que representan la respuesta en la app:

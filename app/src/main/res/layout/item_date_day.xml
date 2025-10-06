@@ -17,7 +17,7 @@
         android:textSize="12sp"
         android:letterSpacing="0.05"
         android:textAllCaps="true"
-        android:textColor="@color/black" />
+        android:textColor="@color/date_chip_text_color" />
 
     <TextView
         android:id="@+id/tvDayMonth"
@@ -26,5 +26,5 @@
         android:text="OCT 3"
         android:textSize="11sp"
         android:letterSpacing="0.02"
-        android:textColor="@color/black" />
+        android:textColor="@color/date_chip_text_color" />
 </LinearLayout>

@@ -5,20 +5,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="?attr/colorSurface"
     android:padding="16dp"
     android:layout_marginTop="20dp"
     tools:context=".ui.search.SearchFragment">
 
-    <!-- Campo de búsqueda limpio -->
+    <!-- search camp -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilSearch"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Buscar equipo"
-        app:boxBackgroundColor="#FFFFFF"
-        app:boxStrokeColor="#DDDDDD"
+        app:boxBackgroundColor="?attr/colorSurfaceVariant"
+        app:boxStrokeColor="?attr/colorOutline"
         app:boxCornerRadiusTopStart="16dp"
         app:boxCornerRadiusTopEnd="16dp"
         app:boxCornerRadiusBottomStart="16dp"
@@ -36,9 +36,9 @@
             android:inputType="textCapWords"
             android:maxLines="1"
             android:paddingStart="12dp"
-            android:textColor="#000000"
+            android:textColor="?attr/colorOnSurface"
             android:hint=""
-            android:textColorHint="#999999"/>
+            android:textColorHint="?attr/colorOnSurfaceVariant"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -48,24 +48,24 @@
         android:layout_height="52dp"
         android:text=""
         app:icon="@android:drawable/ic_menu_search"
-        app:iconTint="@android:color/white"
+        app:iconTint="?attr/colorOnPrimary"
         app:iconPadding="0dp"
         app:iconSize="24dp"
         app:cornerRadius="26dp"
-        app:backgroundTint="#6A1B9A"
+        app:backgroundTint="?attr/colorPrimary"
         app:layout_constraintTop_toTopOf="@id/tilSearch"
         app:layout_constraintBottom_toBottomOf="@id/tilSearch"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="24dp"
         android:contentDescription="Buscar" />
 
-    <!-- Indicador de carga -->
+    <!-- Indicator of load -->
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/progressBar"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:visibility="gone"
-        app:indicatorColor="#6A1B9A"
+        app:indicatorColor="?attr/colorPrimary"
         app:layout_constraintTop_toBottomOf="@id/tilSearch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +76,7 @@
         android:id="@+id/tvError"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="#555555"
+        android:textColor="?attr/colorOnSurfaceVariant"
         android:textSize="14sp"
         android:gravity="center"
         android:visibility="gone"

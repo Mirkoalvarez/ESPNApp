@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:src="@drawable/ic_launcher_foreground" />
 
-    <!-- Nombre del equipo -->
+    <!-- name of team -->
     <TextView
         android:id="@+id/tvName"
         android:layout_width="0dp"
@@ -31,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="River Plate" />
 
-    <!-- Bloque básico: abreviatura y nombre corto -->
+    <!-- Block basic: abreviatures and short name -->
     <LinearLayout
         android:id="@+id/rowBasic"
         android:layout_width="0dp"
@@ -57,7 +57,7 @@
             tools:text="Corto: River Plate" />
     </LinearLayout>
 
-    <!-- Título resultados -->
+    <!-- Title results -->
     <TextView
         android:id="@+id/tvResultsTitle"
         android:layout_width="0dp"
@@ -70,7 +70,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Tira horizontal de fechas -->
+    <!-- horizontal line of dates -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDateStripTeam"
         android:layout_width="0dp"
@@ -83,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:listitem="@layout/item_date_day" />
 
-    <!-- Lista de partidos del equipo -->
+    <!-- List of match team -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTeamResults"
         android:layout_width="0dp"
@@ -109,7 +109,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Mensaje vacío / error -->
+    <!-- Menssage / error -->
     <TextView
         android:id="@+id/tvEmptyTeam"
         android:layout_width="wrap_content"
