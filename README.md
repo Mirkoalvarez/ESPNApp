@@ -2,9 +2,9 @@
   <img src="bannerESPN.svg" alt="Banner del proyecto" width="700">
 </p>
 
-<p align="center">
+
 # ESPNApp
-</p>
+
 
 
 ## Descripción
