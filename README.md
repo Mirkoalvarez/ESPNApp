@@ -1,4 +1,11 @@
+<p align="center">
+  <img src="ESPNApp/bannerESPN.svg" alt="Banner del proyecto" width="700">
+</p>
+
+<p align="center">
 # ESPNApp
+</p>
+
 
 ## Descripción
 ESPNApp es una aplicación Android que replica una portada deportiva con pestañas para noticias, resultados en vivo, búsqueda de equipos y accesos adicionales desde un menú inferior. La navegación entre destinos (Noticias, Resultados, Menú, Buscar y detalle de equipo) se resuelve mediante el componente de navegación y un `BottomNavigationView` configurado en la actividad principal, que además persiste la preferencia de modo oscuro para toda la app.【F:app/src/main/res/navigation/nav_graph.xml†L1-L51】【F:app/src/main/java/com.example.espnapp/MainActivity.kt†L17-L76】
@@ -6,7 +13,12 @@ ESPNApp es una aplicación Android que replica una portada deportiva con pestañ
 La portada agrupa noticias recientes de las principales ligas de fútbol, filtrando por la fecha de publicación del día en la zona horaria del usuario objetivo. Los resultados combinan tableros de varias ligas en paralelo y normalizan la información de cada encuentro para mostrar el estado del partido. La búsqueda permite consultar equipos a través de múltiples ligas y deduplica las coincidencias antes de mostrarlas al usuario.【F:app/src/main/java/com.example.espnapp/ui/news/NewsViewModel.kt†L19-L48】【F:app/src/main/java/com.example.espnapp/ui/news/NewsRepository.kt†L14-L70】【F:app/src/main/java/com.example.espnapp/ui/results/ResultsViewModel.kt†L27-L86】【F:app/src/main/java/com.example.espnapp/ui/results/ResultsRepository.kt†L13-L58】【F:app/src/main/java/com.example.espnapp/ui/search/SearchViewModel.kt†L28-L93】
 
 ## API utilizada
-La aplicación consume la API pública de ESPN disponible en `https://site.api.espn.com/`, encapsulada mediante Retrofit y OkHttp con un interceptor de logging básico para facilitar la depuración de llamadas HTTP.【F:app/src/main/java/com.example.espnapp/network/EspnRetrofit.kt†L8-L26】
+La aplicación consume la API pública de ESPN disponible [Public ESPN API](https://github.com/pseudo-r/Public-ESPN-API), encapsulada mediante Retrofit y OkHttp con un interceptor de logging básico para facilitar la depuración de llamadas HTTP.【F:app/src/main/java/com.example.espnapp/network/EspnRetrofit.kt†L8-L26】
+
+
+🎥 **Demo del proyecto**
+
+[![Ver demo en Google Drive](https://img.shields.io/badge/▶️%20Ver%20demo%20en%20Drive-blue?style=for-the-badge)](https://drive.google.com/file/d/12_y9BrjtjYTzqzlKC7XPQmcwcKqvHtIU/view?usp=sharing)
 
 ## Endpoints y estructura de datos
 A continuación se listan los recursos REST consultados y los modelos relevantes que representan la respuesta en la app:
