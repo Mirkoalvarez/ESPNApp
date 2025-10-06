@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="ESPNApp/bannerESPN.svg" alt="Banner del proyecto" width="700">
+  <img src="bannerESPN.svg" alt="Banner del proyecto" width="700">
 </p>
 
 <p align="center">
